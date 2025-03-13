@@ -7,7 +7,8 @@
 					<v-list-item v-for="order in orders" :key="order.id">
 						<template v-slot:prepend>
 							<v-list-item-action>
-								<v-checkbox input-value="false" :input-value="order.done" color="primary"></v-checkbox>
+								<v-checkbox input-value="false" :input-value="order.done" color="primary"
+									@click="markDone(order)"></v-checkbox>
 							</v-list-item-action>
 						</template>
 
@@ -30,8 +31,23 @@
 export default {
 	data() {
 		return {
+			orders: [
+				{
+					id: "123",
+					name: "Kostya",
+					phone: "+7(978)000-00-05",
+					adId: "1",
+					done: true
+				}
+			]
 
 		}
-	}
+	},
+	methods: {
+		markDone(order) {
+			order.done = !order.done;
+			console.log(order.done);
+		},
+	},
 }
 </script>
