@@ -7,14 +7,12 @@
 					<v-list-item v-for="order in orders" :key="order.id">
 						<template v-slot:prepend>
 							<v-list-item-action>
-								<v-checkbox input-value="false" :input-value="order.done" color="primary"
+								<v-checkbox :input-value="order.done" color="primary"
 									@click="markDone(order)"></v-checkbox>
 							</v-list-item-action>
 						</template>
-
 						<v-list-item-title>{{ order.name }}</v-list-item-title>
 						<v-list-item-subtitle>{{ order.phone }}</v-list-item-subtitle>
-
 						<template v-slot:append>
 							<v-list-item-action>
 								<v-btn class="primary" :to="'/ad/' + order.adId">Open</v-btn>
@@ -22,7 +20,6 @@
 						</template>
 					</v-list-item>
 				</v-list>
-
 			</v-col>
 		</v-row>
 	</v-container>
@@ -40,7 +37,6 @@ export default {
 					done: true
 				}
 			]
-
 		}
 	},
 	methods: {
