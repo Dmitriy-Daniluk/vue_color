@@ -7,7 +7,7 @@
 					<v-text-field name="title" label="Ad Title" type="text" v-model="title"
 						:rules="[(v) => !!v || 'Title is required']">
 					</v-text-field>
-					
+
 					<v-textarea name="description" label="Ad Description" type="text" v-model="description"
 						:rules="[(v) => !!v || 'Description is required']" class="mb-3"></v-textarea>
 				</v-form>
@@ -33,7 +33,22 @@
 export default {
 	data() {
 		return {
-
+			valid: false,
+			title: "",
+			description: "",
+			promo: true
+		}
+	},
+	methods: {
+		createAd() {
+			if (this.$refs.form.validate()) {
+				const ad = {
+					title: this.title,
+					desc: this.description,
+					promo: this.promo
+				}
+				console.log(ad)
+			}
 		}
 	}
 }
