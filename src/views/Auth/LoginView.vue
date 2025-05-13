@@ -18,7 +18,7 @@
 					</v-card-text>
 					<v-card-actions>
 						<v-spacer></v-spacer>
-						<v-btn color="primary" @click="onSubmit" :disabled="!valid">
+						<v-btn color="primary" @click="onSubmit" :loading="loading" :disabled="!valid || loading">
 							Login
 						</v-btn>
 					</v-card-actions>
@@ -61,6 +61,11 @@ export default {
 					})
 			}
 		}
-	}
+	},
+	computed: {
+		loading() {
+			return this.$store.getters.loading
+		}
+	},
 } 
 </script>
