@@ -35,6 +35,7 @@
 
 <script>
 export default {
+	props: ['ad'],
 	data() {
 		return {
 			modal: false
