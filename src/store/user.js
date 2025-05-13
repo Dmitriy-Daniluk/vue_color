@@ -39,11 +39,12 @@ export default {
 				});
 			}
 		},
+
 		async loginUser({ commit }, { email, password }) {
 			commit("clearError");
 			commit("setLoading", true);
 			//Здесь выполняется запрос на сервер
-			let isRequestOk = false;
+			let isRequestOk = true;
 			let promise = new Promise(function (resolve) {
 				setTimeout(() => resolve("Done"), 3000);
 			});
@@ -51,16 +52,21 @@ export default {
 			if (isRequestOk) {
 				await promise.then(() => {
 					commit("setUser", new User(1, email, password));
-					commit("setLoading", false);
+					commit("setLoading", true);
 				});
 			} else {
 				await promise.then(() => {
-					commit("setLoading", false);
+					commit("setLoading", true);
 					commit("setError", "Ошибка логина или пароля");
 					throw "Упс... Ошибка логина или пароля";
 				});
 			}
 		},
+
+		logoutUser({ commit }) {
+			commit('setUser', null);
+			commit('setLoading', false);
+		}
 	},
 	getters: {
 		user(state) {
