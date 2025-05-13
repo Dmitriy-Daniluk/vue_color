@@ -10,8 +10,6 @@ export default {
 	state: {
 		user: null,
 	},
-	mutations: {},
-	actions: {},
 	mutations: {
 		setUser(state, payload) {
 			console.log(payload);
@@ -19,22 +17,27 @@ export default {
 		},
 	},
 	actions: {
-		registerUser({ commit }, { email, password }) {
-			//Здесь запрос на сервер для регистрации
-			commit("setUser", new User(1, email, password));
+		async registerUser({ commit }, { email, password }) {
 			commit("clearError");
 			commit("setLoading", true);
-			fb.auth()
-				.createUserWithEmailAndPassword(email, password)
-				.then((response) => {
-					commit("setUser", new User(response.user.uid));
+			//Здесь выполняется запрос на сервер
+			let isRequestOk = false;
+			let promise = new Promise(function (resolve) {
+				setTimeout(() => resolve("Done"), 3000);
+			});
+
+			if (isRequestOk) {
+				await promise.then(() => {
+					commit("setUser", new User(1, email, password));
 					commit("setLoading", false);
-				})
-				.catch((error) => {
-					commit("setLoading", false);
-					commit("setError", error.message);
-					throw error;
 				});
+			} else {
+				await promise.then(() => {
+					commit("setLoading", false);
+					commit("setError", "Ошибка регистрации");
+					throw "Упс... Ошибка регистрации";
+				});
+			}
 		},
 	},
 	getters: {
