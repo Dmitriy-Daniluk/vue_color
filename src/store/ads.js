@@ -1,38 +1,48 @@
 export default {
 	state: {
-		ads: [
+		ads:[
 			{
-				title: "First",
-				desc: "First Desc",
+				title:"First",
+				desc:"First Desc",
 				promo: true,
 				src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
-				id: "1"
+				id:"1"
 			},
 			{
-				title: "Second",
-				desc: "Second Desc",
+				title:"Second",
+				desc:"Second Desc",
 				promo: true,
 				src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
-				id: "2"
+				id:"2"
 			},
 			{
-				title: "Third",
-				desc: "Thitd Desc",
+				title:"Third",
+				desc:"Thitd Desc",
 				promo: true,
 				src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
-				id: "3"
+				id:"3"
 			},
 			{
-				title: "Fouth",
-				desc: "Fouth Desc",
+				title:"Fouth",
+				desc:"Fouth Desc",
 				promo: true,
 				src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
-				id: "4"
+				id:"4"
 			}
-		]
+
+			]
 	},
-	mutations: {},
-	actions: {},
+	mutations: {
+		createAd(state, payload){
+			state.ads.push(payload)
+		}
+	},
+	actions: {
+		createAd({commit},payload){
+			payload.id = Math.random()
+			commit('createAd', payload)
+		}
+	},
 	getters: {
 		ads(state) {
 			return state.ads
@@ -47,8 +57,9 @@ export default {
 		},
 		adById(state) {
 			return id => {
-			return state.ads.find(ad => ad.id == id)
+				return state.ads.find(ad => ad.id == id)
 			}
-		}		
+		}
+
 	}
 }
